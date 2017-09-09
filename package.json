@@ -8,9 +8,21 @@
   "main": "index.js",
   "module": "default.js",
   "devDependencies": {
+    "del-cli": "^1.1.0",
     "es-observable-tests": "^0.3.0",
     "moon-unit": "^0.2.1",
+    "rollup": "^0.49.3",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-typescript": "^0.8.1",
+    "typescript": "^2.5.2",
+    "uglify-js": "^3.0.28",
     "v8-promise": "*"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "scripts": {
+    "build": "rollup -c ./config/rollup.config.js",
+    "clean": "node_modules/.bin/del-cli -f dist",
+    "compress": "uglifyjs --config-file ./config/compress.json -o dist/observable.min.js dist/observable.js",
+    "rebuild": "npm run clean && npm run build && npm run compress"
+  }
 }
